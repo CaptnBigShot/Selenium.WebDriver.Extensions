@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
     <PackageId>Selenium.WebDriver.Extensions.SimpleSoftworks</PackageId>
     <Authors>Simple Softworks</Authors>
     <Company>Simple Softworks</Company>
+    <Version>0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
