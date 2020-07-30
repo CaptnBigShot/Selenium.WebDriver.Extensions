@@ -5,7 +5,7 @@
     <PackageId>Selenium.WebDriver.Extensions.SimpleSoftworks</PackageId>
     <Authors>Simple Softworks</Authors>
     <Company>Simple Softworks</Company>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
