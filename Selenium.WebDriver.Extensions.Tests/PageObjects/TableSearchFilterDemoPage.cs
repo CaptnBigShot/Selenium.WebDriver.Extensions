@@ -11,6 +11,12 @@ namespace Selenium.WebDriver.Extensions.Tests.PageObjects
             _webDriver = webDriver;
         }
 
+        public IWebElement Body => _webDriver.FindElement(By.TagName("body"));
+
         public IWebElement TaskTable => _webDriver.FindElement(By.Id("task-table"));
+
+        public TableElement TaskTableElement => new TableElement(TaskTable);
+
+        public IWebElement TaskTableRow => TaskTable.FindElement(By.XPath(".//tr"));
     }
 }

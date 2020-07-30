@@ -9,7 +9,9 @@ using Selenium.WebDriver.Extensions.Tests.PageObjects;
 
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    public class TablesTests
+    [TestFixture]
+    [Parallelizable]
+    public class TableElementTests
     {
         private IWebDriver _webDriver;
 
@@ -35,73 +37,61 @@ namespace Selenium.WebDriver.Extensions.Tests
             _webDriver.Quit();
         }
 
+
+        [Test]
+        public void TableElementForNullElement()
+        {
+            Action act = () => new TableElement(null);
+            act.Should()
+                .Throw<ArgumentNullException>()
+                .WithMessage("Element cannot be null (Parameter 'element')");
+        }
+
+        [Test]
+        public void TableElementForUnexpectedTagName()
+        {
+            Action act = () => new TableElement(_tableSearchFilterDemoPage.Body);
+            act.Should()
+                .Throw<UnexpectedTagNameException>()
+                .WithMessage("Element tag name should have been 'table' but was 'body'");
+        }
+
+        [Test]
+        public void TableElementForValidElement()
+        {
+            var tableElement = new TableElement(_tableSearchFilterDemoPage.TaskTable);
+            tableElement.Should().NotBeNull();
+        }
+
+
         [TestCase(1, 3, 3)]
         [TestCase(4, 4, 1)]
         [TestCase(2, 6, 5)]
         [TestCase(1, int.MaxValue, 7)]
         [TestCase(2, int.MaxValue, 6)]
-        public void TestGetTableRowElements(int rowNumStart, int rowNumEnd, int expectedRowCount)
+        public void GetTableRowElements(int rowNumStart, int rowNumEnd, int expectedRowCount)
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
-            var tableRowElements = tableElement.GetTableRowElements(rowNumStart, rowNumEnd);
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
+            var tableRowElements = tableElement.TableRowElements(rowNumStart, rowNumEnd);
 
             tableRowElements.Should().HaveCount(expectedRowCount);
         }
 
-        [Test]
-        public void TestGetTableRowData()
-        {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
-            var tableRowElement = tableElement.GetTableRowElements(1, 1)[0];
-            var tableRowData = tableRowElement.GetTableRowData();
-            var tableRowDataExpected = new List<string>
-            {
-                "1", "Wireframes", "John Smith", "in progress"
-            };
-
-            tableRowData.Should().BeEquivalentTo(tableRowDataExpected);
-        }
 
         [Test]
-        public void TestGetTableRowDataWithExcludedColumns()
+        public void GetTableColumnCellElements()
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
-            var tableRowElement = tableElement.GetTableRowElements(1, 1)[0];
-            var tableRowData = tableRowElement.GetTableRowData(new List<int> { 1, 4 });
-            var tableRowDataExpected = new List<string>
-            {
-                "Wireframes", "John Smith"
-            };
-
-            tableRowData.Should().BeEquivalentTo(tableRowDataExpected);
-        }
-
-
-        [Test]
-        public void TestGetTableRowCellElements()
-        {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
-            var tableRowElement = tableElement.GetTableRowElements(1, 1)[0];
-            var tableRowCellElements = tableRowElement.GetTableRowCellElements();
-
-            tableRowCellElements.Should().HaveCount(4);
-        }
-
-
-        [Test]
-        public void TestGetTableColumnCellElements()
-        {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
-            var tableColumnCellElements = tableElement.GetTableColumnCellElements(1);
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
+            var tableColumnCellElements = tableElement.GetColumnCellElements(1);
 
             tableColumnCellElements.Should().HaveCount(7);
         }
 
         [Test]
-        public void TestGetTableColumnCellElementsText()
+        public void GetTableColumnCellElementsText()
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
-            var tableColumnCellElements = tableElement.GetTableColumnCellElements(1);
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
+            var tableColumnCellElements = tableElement.GetColumnCellElements(1);
 
             var columnCellElementsText = tableColumnCellElements.Select(tableColumnCellElement => tableColumnCellElement.Text);
             var expectedColumnCellElementsText = new List<string>
@@ -114,9 +104,9 @@ namespace Selenium.WebDriver.Extensions.Tests
 
 
         [Test]
-        public void TestGetTableData()
+        public void GetTableData()
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
             var tableData = tableElement.GetTableData();
             var expectedTableData = new List<List<string>>
             {
@@ -133,9 +123,9 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Test]
-        public void TestGetTableDataWithRowLimit()
+        public void GetTableDataWithRowLimit()
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
             var tableData = tableElement.GetTableData(1, 2);
             var expectedTableData = new List<List<string>>
             {
@@ -147,9 +137,9 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Test]
-        public void TestGetTableDataWithRowSkip()
+        public void GetTableDataWithRowSkip()
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
             var tableData = tableElement.GetTableData(5, int.MaxValue);
             var expectedTableData = new List<List<string>>
             {
@@ -162,9 +152,9 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Test]
-        public void TestGetTableDataWithRowLimitAndRowSkip()
+        public void GetTableDataWithRowLimitAndRowSkip()
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
             var tableData = tableElement.GetTableData(3, 4);
             var expectedTableData = new List<List<string>>
             {
@@ -176,10 +166,10 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Test]
-        public void TestGetTableDataWithExcludedColumns()
+        public void GetTableDataWithExcludedColumns()
         {
-            var tableElement = _tableSearchFilterDemoPage.TaskTable;
-            var tableData = tableElement.GetTableData(columnsToExclude: new List<int> { 1, 4 });
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
+            var tableData = tableElement.GetTableData(new HashSet<int> { 1, 4 });
             var expectedTableData = new List<List<string>>
             {
                 new List<string> { "Wireframes", "John Smith" },
