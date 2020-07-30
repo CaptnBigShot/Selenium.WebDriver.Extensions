@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 
 namespace Selenium.WebDriver.Extensions
@@ -35,13 +36,14 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the table cells (td) for the table row element.
         /// </summary>
-        public IList<IWebElement> CellElements() => 
-            WrappedElement.FindElements(By.XPath("./td"));
+        public List<IWebElement> CellElements() => 
+            WrappedElement.FindElements(By.XPath("./td"))
+                .ToList();
 
         /// <summary>
         /// Gets the table cells (td) data for the table row element.
         /// </summary>
-        public IList<string> GetRowData(HashSet<int> columnsToExclude = null)
+        public List<string> GetRowData(HashSet<int> columnsToExclude = null)
         {
             var tableRowData = new List<string>();
             var tdElements = CellElements();

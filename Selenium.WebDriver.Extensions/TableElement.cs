@@ -36,26 +36,28 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the table rows (tr) for the table element.
         /// </summary>
-        public IList<IWebElement> RowElements() => 
-            WrappedElement.FindElements(By.XPath("./tbody/tr"));
+        public List<IWebElement> RowElements() => 
+            WrappedElement.FindElements(By.XPath("./tbody/tr"))
+                .ToList();
 
         /// <summary>
         /// Gets the table rows (tr) in a given range for the table element.
         /// </summary>
-        public IList<IWebElement> RowElements(int rowNumStart, int rowNumEnd) => 
-            WrappedElement.FindElements(By.XPath($"./tbody/tr[position() >= {rowNumStart} and not(position() > {rowNumEnd})]"));
+        public List<IWebElement> RowElements(int rowNumStart, int rowNumEnd) => 
+            WrappedElement.FindElements(By.XPath($"./tbody/tr[position() >= {rowNumStart} and not(position() > {rowNumEnd})]"))
+                .ToList();
 
         /// <summary>
         /// Gets the table row elements for the table element.
         /// </summary>
-        public IList<TableRowElement> TableRowElements() => 
+        public List<TableRowElement> TableRowElements() => 
             RowElements().Select(rowElement => new TableRowElement(rowElement))
                 .ToList();
 
         /// <summary>
         /// Gets the table row elements in a given range for the table element.
         /// </summary>
-        public IList<TableRowElement> TableRowElements(int rowNumStart, int rowNumEnd) => 
+        public List<TableRowElement> TableRowElements(int rowNumStart, int rowNumEnd) => 
             RowElements(rowNumStart, rowNumEnd)
                 .Select(rowElement => new TableRowElement(rowElement))
                 .ToList();
@@ -63,7 +65,7 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the table cell (td) data for the table rows (tr) for the table element.
         /// </summary>
-        public IList<IList<string>> GetTableData(HashSet<int> columnsToExclude = null) => 
+        public List<List<string>> GetTableData(HashSet<int> columnsToExclude = null) => 
             TableRowElements()
                 .Select(tableRowElement => tableRowElement.GetRowData(columnsToExclude))
                 .ToList();
@@ -71,7 +73,7 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the table cell (td) data for the table rows (tr) in a given range for the table element.
         /// </summary>
-        public IList<IList<string>> GetTableData(int rowNumStart, int rowNumEnd, HashSet<int> columnsToExclude = null) =>
+        public List<List<string>> GetTableData(int rowNumStart, int rowNumEnd, HashSet<int> columnsToExclude = null) =>
             TableRowElements(rowNumStart, rowNumEnd)
                 .Select(tableRowElement => tableRowElement.GetRowData(columnsToExclude))
                 .ToList();
@@ -79,7 +81,8 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the table's cell (td) elements for a table column <see cref="IWebElement"/> instance.
         /// </summary>
-        public IList<IWebElement> GetColumnCellElements(int columnNumber) => 
-            WrappedElement.FindElements(By.XPath($"./tbody/tr/td[{columnNumber}]"));
+        public List<IWebElement> GetColumnCellElements(int columnNumber) => 
+            WrappedElement.FindElements(By.XPath($"./tbody/tr/td[{columnNumber}]"))
+                .ToList();
     }
 }
