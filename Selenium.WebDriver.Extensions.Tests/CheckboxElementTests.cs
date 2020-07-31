@@ -15,19 +15,24 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         private BasicCheckboxDemoPage _basicCheckboxDemoPage;
 
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            _webDriver = new WebDriverHelper().StartWebDriver();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTeardown()
+        {
+            _webDriver.Quit();
+        }
+
         [SetUp]
         public void Setup()
         {
-            _webDriver = new WebDriverHelper().StartWebDriver();
             _webDriver.Url = "https://www.seleniumeasy.com/test/basic-checkbox-demo.html";
 
             _basicCheckboxDemoPage = new BasicCheckboxDemoPage(_webDriver);
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            _webDriver.Quit();
         }
 
 

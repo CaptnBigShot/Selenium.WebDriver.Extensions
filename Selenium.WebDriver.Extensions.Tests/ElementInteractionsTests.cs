@@ -14,20 +14,26 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         private BasicFirstFormDemoPage _basicFirstFormDemoPage;
 
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            _webDriver = new WebDriverHelper().StartWebDriver();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTeardown()
+        {
+            _webDriver.Quit();
+        }
+
         [SetUp]
         public void Setup()
         {
-            _webDriver = new WebDriverHelper().StartWebDriver();
             _webDriver.Url = "https://www.seleniumeasy.com/test/basic-first-form-demo.html";
 
             _basicFirstFormDemoPage = new BasicFirstFormDemoPage(_webDriver);
         }
 
-        [TearDown]
-        public void Teardown()
-        {
-            _webDriver.Quit();
-        }
 
         [TestCase(null, "chocolate", "chocolate")]
         [TestCase("vanilla", "chocolate", "vanillachocolate")]

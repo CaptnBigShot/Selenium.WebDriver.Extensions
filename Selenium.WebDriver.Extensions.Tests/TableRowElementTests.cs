@@ -16,20 +16,26 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         private TableSearchFilterDemoPage _tableSearchFilterDemoPage;
 
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            _webDriver = new WebDriverHelper().StartWebDriver();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTeardown()
+        {
+            _webDriver.Quit();
+        }
+
         [SetUp]
         public void Setup()
         {
-            _webDriver = new WebDriverHelper().StartWebDriver();
             _webDriver.Url = "https://www.seleniumeasy.com/test/table-search-filter-demo.html";
 
             _tableSearchFilterDemoPage = new TableSearchFilterDemoPage(_webDriver);
         }
 
-        [TearDown]
-        public void Teardown()
-        {
-            _webDriver.Quit();
-        }
 
         [Test]
         public void TableRowElementForNullElement()

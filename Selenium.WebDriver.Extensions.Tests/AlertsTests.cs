@@ -14,20 +14,26 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         private JavascriptAlertBoxDemoPage _javascriptAlertBoxDemoPage;
 
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            _webDriver = new WebDriverHelper().StartWebDriver();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTeardown()
+        {
+            _webDriver.Quit();
+        }
+
         [SetUp]
         public void Setup()
         {
-            _webDriver = new WebDriverHelper().StartWebDriver();
             _webDriver.Url = "https://www.seleniumeasy.com/test/javascript-alert-box-demo.html";
 
             _javascriptAlertBoxDemoPage = new JavascriptAlertBoxDemoPage(_webDriver);
         }
 
-        [TearDown]
-        public void Teardown()
-        {
-            _webDriver.Quit();
-        }
 
         [TestCase(false)]
         [TestCase(true)]

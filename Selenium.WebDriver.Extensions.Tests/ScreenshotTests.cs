@@ -11,17 +11,18 @@ namespace Selenium.WebDriver.Extensions.Tests
     {
         private IWebDriver _webDriver;
 
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public void OneTimeSetup()
         {
             _webDriver = new WebDriverHelper().StartWebDriver();
         }
 
-        [TearDown]
-        public void Teardown()
+        [OneTimeTearDown]
+        public void OneTimeTeardown()
         {
             _webDriver.Quit();
         }
+
 
         [Test]
         public void GetEntirePageScreenshotsForAPageWithOneScreenshot()
