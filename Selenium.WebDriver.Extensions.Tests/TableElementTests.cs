@@ -4,7 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using Selenium.WebDriver.Extensions.Tests.Helpers;
 using Selenium.WebDriver.Extensions.Tests.PageObjects;
 
 namespace Selenium.WebDriver.Extensions.Tests
@@ -20,12 +20,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [SetUp]
         public void Setup()
         {
-            var chromeOptions = new ChromeOptions { AcceptInsecureCertificates = true };
-            chromeOptions.AddArgument("no-sandbox");
-            _webDriver = new ChromeDriver(chromeOptions);
-
-            _webDriver.Manage().Window.Maximize();
-            _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            _webDriver = new WebDriverHelper().StartWebDriver();
             _webDriver.Url = "https://www.seleniumeasy.com/test/table-search-filter-demo.html";
 
             _tableSearchFilterDemoPage = new TableSearchFilterDemoPage(_webDriver);
