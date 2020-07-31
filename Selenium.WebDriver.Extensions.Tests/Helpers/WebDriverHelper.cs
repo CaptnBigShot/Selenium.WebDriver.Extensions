@@ -10,9 +10,9 @@ namespace Selenium.WebDriver.Extensions.Tests.Helpers
         {
             var chromeOptions = new ChromeOptions { AcceptInsecureCertificates = true };
             chromeOptions.AddArgument("no-sandbox");
+            chromeOptions.AddArgument("start-maximized");
             var webDriver = new ChromeDriver(chromeOptions);
 
-            webDriver.Manage().Window.Maximize();
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             return webDriver;
