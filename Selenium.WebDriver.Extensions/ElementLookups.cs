@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 
 namespace Selenium.WebDriver.Extensions
@@ -87,6 +88,16 @@ namespace Selenium.WebDriver.Extensions
             var js = (IJavaScriptExecutor)webDriver;
             js.ExecuteScript("arguments[0].scrollIntoView()", element);
             new Actions(webDriver).MoveToElement(element).Perform();
+        }
+
+        /// <summary>
+        /// Scrolls the element into view.
+        /// </summary>
+        /// <param name="element"></param>
+        public static void ScrollToElement(this IWebElement element)
+        {
+            var driver = ((IWrapsDriver)element).WrappedDriver;
+            ScrollToElement(driver, element);
         }
     }
 }
