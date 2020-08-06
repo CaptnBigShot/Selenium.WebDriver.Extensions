@@ -19,8 +19,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release
-    - name: Test
-      run: dotnet test --verbosity normal
     - name: Publish Selenium.WebDriver.Extensions
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
