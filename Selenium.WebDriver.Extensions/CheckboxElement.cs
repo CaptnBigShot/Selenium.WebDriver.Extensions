@@ -44,6 +44,7 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the checkbox state.
         /// </summary>
-        public bool IsChecked => WrappedElement.Selected;
+        public bool IsChecked => 
+            WrappedElement.Selected;
     }
 }
