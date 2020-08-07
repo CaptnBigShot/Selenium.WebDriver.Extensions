@@ -91,27 +91,26 @@ namespace Selenium.WebDriver.Extensions.Tests.Telerik.KendoUi
 
 
         [Test]
-        public void KendoComboBoxListBoxElementWhenCollapsed()
+        public void KendoComboBoxKendoListBoxElementWhenCollapsed()
         {
             var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
-            kendoComboBox.Invoking(x => x.ListBoxElement).Should().Throw<NoSuchElementException>();
+            kendoComboBox.Invoking(x => x.KendoListBoxElement).Should().Throw<NoSuchElementException>();
         }
 
         [Test]
-        public void KendoComboBoxListBoxElementWhenExpanded()
+        public void KendoComboBoxKendoListBoxElementWhenExpanded()
         {
             var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
             kendoComboBox.ExpandListBox();
-            kendoComboBox.ListBoxElement.Should().NotBeNull();
+            kendoComboBox.KendoListBoxElement.Should().NotBeNull();
         }
 
 
         [Test]
-        public void KendoComboBoxListBoxItemElements()
+        public void KendoComboBoxOptions()
         {
             var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
-            kendoComboBox.ExpandListBox();
-            kendoComboBox.ListBoxItemElements.Should().HaveCount(4);
+            kendoComboBox.Options().Should().HaveCount(4);
         }
 
 
@@ -136,7 +135,7 @@ namespace Selenium.WebDriver.Extensions.Tests.Telerik.KendoUi
         {
             var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
             kendoComboBox.ExpandListBox();
-            kendoComboBox.ListBoxElement.Displayed.Should().BeTrue();
+            kendoComboBox.KendoListBoxElement.WrappedElement.Displayed.Should().BeTrue();
         }
 
 
@@ -146,35 +145,7 @@ namespace Selenium.WebDriver.Extensions.Tests.Telerik.KendoUi
             var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
             kendoComboBox.ExpandListBox();
             kendoComboBox.CollapseListBox();
-            kendoComboBox.Invoking(x => x.ListBoxElement).Should().Throw<NoSuchElementException>();
-        }
-
-
-        [Test]
-        public void KendoComboBoxFindListBoxItemByText()
-        {
-            var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
-            kendoComboBox.ExpandListBox();
-            var listBoxItemElement = kendoComboBox.FindListBoxItemByText("Rib Knit");
-            listBoxItemElement.Should().NotBeNull();
-        }
-
-
-        [Test]
-        public void KendoComboBoxFindListBoxItemByTextForNonExistentItem()
-        {
-            var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
-            kendoComboBox.ExpandListBox();
-            kendoComboBox.Invoking(x => x.FindListBoxItemByText("Dummy Item")).Should().Throw<NoSuchElementException>();
-        }
-
-        [Test]
-        public void KendoComboBoxClickListBoxItemByText()
-        {
-            var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
-            kendoComboBox.ExpandListBox();
-            kendoComboBox.ClickListBoxItemByText("Polyester");
-            kendoComboBox.GetInputText.Should().Be("Polyester");
+            kendoComboBox.Invoking(x => x.KendoListBoxElement).Should().Throw<NoSuchElementException>();
         }
 
 
@@ -182,17 +153,8 @@ namespace Selenium.WebDriver.Extensions.Tests.Telerik.KendoUi
         public void KendoComboBoxSelectListItemByText()
         {
             var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
-            kendoComboBox.SelectListItemByText("Polyester");
+            kendoComboBox.SelectByText("Polyester");
             kendoComboBox.GetInputText.Should().Be("Polyester");
-        }
-
-
-        [Test]
-        public void KendoComboBoxGetListBoxItems()
-        {
-            var kendoComboBox = new KendoComboBoxElement(_webDriver, _telerikKendoUiComboBoxPage.FabricKendoComboBoxId);
-            var listBoxItems = kendoComboBox.GetListBoxItems();
-            listBoxItems.Should().HaveCount(4);
         }
     }
 }
