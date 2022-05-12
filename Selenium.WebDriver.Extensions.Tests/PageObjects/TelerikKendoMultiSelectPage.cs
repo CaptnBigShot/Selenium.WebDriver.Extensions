@@ -12,7 +12,7 @@ namespace Selenium.WebDriver.Extensions.Tests.PageObjects
             _webDriver = webDriver;
         }
 
-        public IWebElement ExampleWrapElement => _webDriver.FindElement(By.Id("exampleWrap"));
+        public IWebElement ExampleWrapElement => _webDriver.FindElement(By.Id("example"));
        
         public string OptionalMultiSelectKendoId => "optional_taglist";
 

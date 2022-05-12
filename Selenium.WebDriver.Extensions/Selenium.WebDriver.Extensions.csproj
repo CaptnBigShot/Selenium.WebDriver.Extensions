@@ -5,7 +5,7 @@
     <PackageId>Selenium.WebDriver.Extensions.SimpleSoftworks</PackageId>
     <Authors>Simple Softworks</Authors>
     <Company>Simple Softworks</Company>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
 	<RepositoryUrl>https://github.com/CaptnBigShot/Selenium.WebDriver.Extensions</RepositoryUrl>
   </PropertyGroup>
 
@@ -14,8 +14,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Selenium.Support" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.Support" Version="4.1.1" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.1.1" />
   </ItemGroup>
 
 </Project>

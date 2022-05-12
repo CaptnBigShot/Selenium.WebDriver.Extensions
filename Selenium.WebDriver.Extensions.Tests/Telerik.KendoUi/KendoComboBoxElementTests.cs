@@ -37,6 +37,8 @@ namespace Selenium.WebDriver.Extensions.Tests.Telerik.KendoUi
             Thread.Sleep(1000);
 
             _telerikKendoUiComboBoxPage = new TelerikKendoUiComboBoxPage(_webDriver);
+
+            _webDriver.ScrollToElement(_telerikKendoUiComboBoxPage.ImageElement);
         }
 
 

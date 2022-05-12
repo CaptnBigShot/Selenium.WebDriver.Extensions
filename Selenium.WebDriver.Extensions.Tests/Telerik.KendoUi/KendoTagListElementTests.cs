@@ -32,7 +32,7 @@ namespace Selenium.WebDriver.Extensions.Tests.Telerik.KendoUi
         [SetUp]
         public void Setup()
         {
-            _webDriver.Url = "https://demos.telerik.com/kendo-ui/multiselect/tag-mode";
+            _webDriver.Url = "https://web.archive.org/web/20201026073830/https://demos.telerik.com/kendo-ui/multiselect/tag-mode";
             _webDriver.WaitForPageToLoad();
             Thread.Sleep(1000);
 

@@ -67,7 +67,7 @@ namespace Selenium.WebDriver.Extensions.Telerik.KendoUi
         /// <returns></returns>
         public IWebElement FindListBoxItemByText(string text)
         {
-            var byText = text == "" ? "./li[not(text())]" : $"./li[text()='{text}']";
+            var byText = text == "" ? "./li[not(text())]" : $"./li[normalize-space()='{text}']";
 
             return WrappedElement.FindElement(By.XPath(byText));
         }

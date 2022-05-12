@@ -32,7 +32,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [SetUp]
         public void Setup()
         {
-            _webDriver.Url = "https://www.seleniumeasy.com/test/table-search-filter-demo.html";
+            _webDriver.Url = "https://web.archive.org/web/20180920020553/http://www.seleniumeasy.com/test/table-search-filter-demo.html";
 
             _tableSearchFilterDemoPage = new TableSearchFilterDemoPage(_webDriver);
         }
@@ -182,6 +182,31 @@ namespace Selenium.WebDriver.Extensions.Tests
             };
 
             tableData.Should().BeEquivalentTo(expectedTableData);
+        }
+
+        [Test]
+        public void GetTableHeaderElements()
+        {
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
+            var tableHeaderElements = tableElement.HeaderElements();
+
+            tableHeaderElements.Should().HaveCount(4);
+        }
+
+        [Test]
+        public void GetTableHeaders()
+        {
+            var tableElement = _tableSearchFilterDemoPage.TaskTableElement;
+            var tableHeaders = tableElement.Headers();
+            var expectedTableHeaders = new List<string>
+            {
+                "#",
+                "Task",
+                "Assignee",
+                "Status"
+            };
+
+            tableHeaders.Should().BeEquivalentTo(expectedTableHeaders);
         }
     }
 }

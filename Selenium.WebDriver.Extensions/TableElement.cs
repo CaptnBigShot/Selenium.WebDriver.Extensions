@@ -84,5 +84,19 @@ namespace Selenium.WebDriver.Extensions
         public List<IWebElement> GetColumnCellElements(int columnNumber) => 
             WrappedElement.FindElements(By.XPath($"./tbody/tr/td[{columnNumber}]"))
                 .ToList();
+
+        /// <summary>
+        /// Gets the table header (th) elements for the table element.
+        /// </summary>
+        public List<IWebElement> HeaderElements() =>
+            WrappedElement.FindElements(By.XPath("./thead/tr/th"))
+                .ToList();
+
+        /// <summary>
+        /// Gets the table header (th) elements text for the table element.
+        /// </summary>
+        public List<string> Headers() =>
+            HeaderElements().Select(x => x.Text)
+                .ToList();
     }
 }

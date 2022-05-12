@@ -27,7 +27,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [Test]
         public void GetEntirePageScreenshotsForAPageWithOneScreenshot()
         {
-            _webDriver.Url = "https://help.duckduckgo.com/";
+            _webDriver.Url = "https://help.duckduckgo.com/404";
 
             var screenshots = _webDriver.GetEntirePageScreenshots();
 
@@ -37,7 +37,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [Test]
         public void GetEntirePageScreenshotsForAPageWithMultipleScreenshots()
         {
-            _webDriver.Url = "https://www.seleniumeasy.com/test/basic-checkbox-demo.html";
+            _webDriver.Url = "https://web.archive.org/web/20180911154259/http://www.seleniumeasy.com/test/basic-checkbox-demo.html";
 
             var screenshots = _webDriver.GetEntirePageScreenshots();
 

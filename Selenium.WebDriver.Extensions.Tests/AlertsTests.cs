@@ -29,7 +29,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [SetUp]
         public void Setup()
         {
-            _webDriver.Url = "https://www.seleniumeasy.com/test/javascript-alert-box-demo.html";
+            _webDriver.Url = "https://web.archive.org/web/20180920010422/http://www.seleniumeasy.com/test/javascript-alert-box-demo.html";
 
             _javascriptAlertBoxDemoPage = new JavascriptAlertBoxDemoPage(_webDriver);
         }

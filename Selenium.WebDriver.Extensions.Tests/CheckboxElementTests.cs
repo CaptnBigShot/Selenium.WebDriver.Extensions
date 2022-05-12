@@ -30,7 +30,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [SetUp]
         public void Setup()
         {
-            _webDriver.Url = "https://www.seleniumeasy.com/test/basic-checkbox-demo.html";
+            _webDriver.Url = "https://web.archive.org/web/20180911154259/http://www.seleniumeasy.com/test/basic-checkbox-demo.html";
 
             _basicCheckboxDemoPage = new BasicCheckboxDemoPage(_webDriver);
         }

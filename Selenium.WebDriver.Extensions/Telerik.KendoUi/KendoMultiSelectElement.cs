@@ -49,7 +49,7 @@ namespace Selenium.WebDriver.Extensions.Telerik.KendoUi
             }
 
             SearchContext = searchContext;
-            By = By.XPath($".//ul[contains(@id, '{kendoId}')]/parent::div/parent::div");
+            By = By.XPath($".//*[contains(@id, '{kendoId}')]/ancestor::*[contains(@class, 'k-multiselect')]");
         }
 
         /// <summary>

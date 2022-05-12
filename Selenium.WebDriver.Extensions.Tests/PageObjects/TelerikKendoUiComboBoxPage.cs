@@ -16,7 +16,7 @@ namespace Selenium.WebDriver.Extensions.Tests.PageObjects
        
         public string FabricKendoComboBoxId => "fabric_listbox";
 
-        public IWebElement FabricKendoComboBox => _webDriver.FindElement(By.XPath($"//input[@aria-owns='{FabricKendoComboBoxId}']/parent::span/parent::span"));
+        public IWebElement FabricKendoComboBox => _webDriver.FindElement(By.XPath($"//input[@aria-owns='{FabricKendoComboBoxId}']/parent::span"));
 
         public KendoComboBoxElement FabricKendoComboBoxElement => new KendoComboBoxElement(FabricKendoComboBox);
     }

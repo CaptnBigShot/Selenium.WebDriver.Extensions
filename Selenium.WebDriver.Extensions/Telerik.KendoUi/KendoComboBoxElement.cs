@@ -48,7 +48,10 @@ namespace Selenium.WebDriver.Extensions.Telerik.KendoUi
                 throw new ArgumentNullException(nameof(kendoId), "kendoId cannot be null");
             }
 
-            WrappedElement = searchContext.FindElement(By.XPath($"//input[contains(@aria-owns, '{kendoId}')]/parent::span/parent::span"));
+            var inputElement = searchContext.FindElement(By.XPath($".//input[contains(@aria-owns, '{kendoId}')]"));
+            var parentElement = inputElement.FindElement(By.XPath("./ancestor::span[contains(@class, 'k-combobox')]"));
+
+            WrappedElement = parentElement;
         }
 
         /// <summary>
@@ -60,13 +63,13 @@ namespace Selenium.WebDriver.Extensions.Telerik.KendoUi
         /// Gets the Kendo combo box's input element.
         /// </summary>
         public IWebElement InputElement => 
-            WrappedElement.FindElement(By.XPath("./span/input[@type='text']"));
+            WrappedElement.FindElement(By.XPath(".//input[@type='text']"));
 
         /// <summary>
         /// Gets the input text box's value.
         /// </summary>
         public string GetInputText =>
-            InputElement.GetProperty("value");
+            InputElement.GetDomProperty("value");
 
         /// <summary>
         /// Sets the value of the Kendo combo box's input text box.
@@ -79,7 +82,7 @@ namespace Selenium.WebDriver.Extensions.Telerik.KendoUi
         /// Gets the Kendo combo box's select element.
         /// </summary>
         public IWebElement SelectElement => 
-            WrappedElement.FindElement(By.XPath("./span/span[@class='k-select']"));
+            WrappedElement.FindElement(By.XPath(".//span[contains(@class, 'k-icon k-i-arrow')]"));
 
         /// <summary>
         /// Gets the Kendo List Box.

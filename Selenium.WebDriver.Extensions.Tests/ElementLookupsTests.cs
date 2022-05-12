@@ -29,7 +29,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [SetUp]
         public void Setup()
         {
-            _webDriver.Url = "https://www.seleniumeasy.com/test/basic-first-form-demo.html";
+            _webDriver.Url = "https://web.archive.org/web/20180926132852/http://www.seleniumeasy.com/test/basic-first-form-demo.html";
 
             _basicFirstFormDemoPage = new BasicFirstFormDemoPage(_webDriver);
         }
